@@ -20,10 +20,10 @@ docker-restart:
 	export COMPOSE_FILE=docker-compose.yml; docker-compose down --volumes && docker-compose up -d
 
 dci:
-	docker exec -it php composer install && sudo chown -R $(USER):$(shell id -g) vendor
+	docker exec -it php composer install && sudo chown -R $(USER):$(shell id -g) app/vendor
 
 dcu:
-	docker exec -it php composer update && sudo chown -R $(USER):$(shell id -g) vendor
+	docker exec -it php composer update && sudo chown -R $(USER):$(shell id -g) app/vendor
 
 access-mysql:
 	docker exec -it database bash
