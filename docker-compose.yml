@@ -9,7 +9,7 @@ services:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: digitalmenu
       MYSQL_USER: digitalmenu
-      MYSQL_PASSWORD: digitalM@2022
+      MYSQL_PASSWORD: digitalM3n12022
     ports:
       - '4306:3306'
     volumes:
