@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Pratos{% endblock %}
+
+{% block body %}
+    <br>
+    <div class="clearfix"></div>
+    <div class="container">
+        <h2>Editar Pratos</h2>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <td>Numero Pedido</td>
+                <td>Nome do Prato</td>
+                <td>Descrição do Prato</td>
+                <td>Preço</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dish in dishes %}
+            <tr>
+                <td>{{ dish.id }}</td>
+                <td>{{ dish.dish_name }}</td>
+                <td>{{ dish.dish_description }}</td>
+                <td>R$ - {{ dish.price }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

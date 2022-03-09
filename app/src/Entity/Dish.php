@@ -20,12 +20,17 @@ class Dish
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $dish_name;
+    public $dish_name;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $dish_description;
+    public $dish_description;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
 
     public function getId(): ?int
     {
@@ -52,6 +57,18 @@ class Dish
     public function setDishDescription(?string $dish_description): self
     {
         $this->dish_description = $dish_description;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }
