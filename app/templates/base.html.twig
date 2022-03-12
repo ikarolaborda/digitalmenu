@@ -46,17 +46,16 @@
                 <p>Conectado como:  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Sair</a></p>
             {% else %}
                 <a href="{{ path('app_login') }}" class="login">Login</a>
-                <a href="{{ path('register') }}" class="register">Registro de usuários</a>
             {% endif %}
 
         </div>
     </div>
     <ul class="main-menu">
         <li><a href="{{ path('home') }}">Início</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="{{ path('menu') }}">Cardápio</a></li>
         <li><a href="blog.html">News</a></li>
         <li><a href="contact.html">Contact</a></li>
-        {% if app.user %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li><a href="{{ path('dish.dish_main') }}">Pratos</a>
                 <ul class="sub-menu">
                     <li><a href="{{ path('dish.create') }}">Adicionar Prato</a></li>
@@ -65,9 +64,8 @@
                     <li><a href="blog.html">Blog</a></li>
                 </ul>
             </li>
+            <li><a href="{{ path('register') }}" class="register text-danger">Registro de usuários</a></li>
         {% endif %}
-
-            <li></li>
 
 
     </ul>
