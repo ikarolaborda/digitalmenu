@@ -56,14 +56,16 @@
         <li><a href="#">About</a></li>
         <li><a href="blog.html">News</a></li>
         <li><a href="contact.html">Contact</a></li>
-        <li><a href="{{ path('dish.dish_main') }}">Pratos</a>
-            <ul class="sub-menu">
-                <li><a href="{{ path('dish.create') }}">Adicionar Prato</a></li>
-                <li><a href="playlist.html">Playlist</a></li>
-                <li><a href="artist.html">Artist</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
-        </li>
+        {% if app.user %}
+            <li><a href="{{ path('dish.dish_main') }}">Pratos</a>
+                <ul class="sub-menu">
+                    <li><a href="{{ path('dish.create') }}">Adicionar Prato</a></li>
+                    <li><a href="playlist.html">Playlist</a></li>
+                    <li><a href="artist.html">Artist</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+            </li>
+        {% endif %}
 
             <li></li>
 
