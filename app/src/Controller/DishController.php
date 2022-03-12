@@ -42,8 +42,21 @@ class DishController extends AbstractController
 
         if($form->isSubmitted()) {
             $em = $this->getDoctrine()->getManager();
+            $image = $request->files->get('dish')['image'];
+            if($image) {
+                $filename = md5(uniqid()).'.'.$image->guessClientExtension();
+            }
+
+            $image->move(
+                $this->getParameter('images_folder'),
+                $filename
+            );
+
+            $dish->setImage($filename);
+
             $em->persist($dish);
             $em->flush();
+            $this->addFlash("dishCreated","O prato solicitado foi criado com sucesso");
             return $this->redirect($this->generateUrl('dish.dish_main'));
         }
 
@@ -52,4 +65,28 @@ class DishController extends AbstractController
             'createForm' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id, DishRepository $dishRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dish = $dishRepository->find($id);
+        $em->remove($dish);
+        $em->flush();
+        $this->addFlash("dishDeleted","O prato solicitado foi removido");
+        return $this->redirect($this->generateUrl('dish.dish_main'));
+    }
+
+    /**
+     * @Route("/show/{id}", name="show")
+     */
+    public function show(Dish $dish)
+    {
+        return $this->render('dish/show.html.twig', [
+            'dish' => $dish
+        ]);
+    }
+
 }

@@ -3,26 +3,47 @@
 {% block title %}Lista de Pratos{% endblock %}
 
 {% block body %}
+
+
     <br>
     <div class="clearfix"></div>
     <div class="container">
+        {% for message in app.flashes('dishDeleted') %}
+            <div class="alert alert-danger">
+                <h4 class="text-center text-bold"><i class="fa fa-trash"></i> <span>{{ message }}</span></h4>
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('dishCreated') %}
+            <div class="alert alert-success">
+                <h4 class="text-center text-bold"><i class="fa fa-plus-square"></i> <span>{{ message }}</span></h4>
+            </div>
+        {% endfor %}
         <h2>Editar Pratos</h2>
+        <br>
         <table class="table table-striped">
             <thead>
-            <tr>
+            <tr class="text-center">
                 <td>Numero Pedido</td>
                 <td>Nome do Prato</td>
                 <td>Descrição do Prato</td>
                 <td>Preço</td>
+                <td>Imagem</td>
+                <td>Acões</td>
             </tr>
             </thead>
             <tbody>
             {% for dish in dishes %}
-            <tr>
+            <tr class="text-center">
                 <td>{{ dish.id }}</td>
                 <td>{{ dish.dish_name }}</td>
                 <td>{{ dish.dish_description }}</td>
                 <td>R$ - {{ dish.price }}</td>
+                {% if dish.image != null %}
+                    <td><img src="{{ asset('images/' ~ dish.image) }}" alt="" width="100px" height="100px"></td>
+                {% else %}
+                    <td class="text-danger">Sem imagem cadastrada</td>
+                {% endif %}
+                <td><a class="text-danger" href="{{ path('dish.delete',{id: dish.id}) }}"><i><span class="fa fa-trash-o"></span></i></a></td>
             </tr>
             {% endfor %}
             </tbody>

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <div class="container">
+        <div class="row">
+            <h1>{{ dish.dish_name }}</h1>
+            <br>
+        </div>
+        <div class="row">
+            <img src="{{ asset('images/' ~ dish.image) }}" alt="">
+        </div>
+    </div>
+{% endblock %}
