@@ -41,11 +41,14 @@
         <img src="{{ asset('img/logo.png') }}" alt="">
     </a>
     <div class="header-right">
-        <a href="#" class="hr-btn">Help</a>
-        <span>|</span>
         <div class="user-panel">
-            <a href="{{ path('app_login') }}" class="login">Login</a>
-            <a href="{{ path('register') }}" class="register">Registro de usuários</a>
+            {% if app.user %}
+                <p>Conectado como:  {{ app.user.username }}, <a href="{{ path('app_logout') }}">Sair</a></p>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="login">Login</a>
+                <a href="{{ path('register') }}" class="register">Registro de usuários</a>
+            {% endif %}
+
         </div>
     </div>
     <ul class="main-menu">
@@ -59,9 +62,11 @@
                 <li><a href="playlist.html">Playlist</a></li>
                 <li><a href="artist.html">Artist</a></li>
                 <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
             </ul>
         </li>
+
+            <li></li>
+
 
     </ul>
 </header>
