@@ -20,12 +20,20 @@
         {% endfor %}
         <h2>Editar Pratos</h2>
         <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-9"></div>
+                <div class="col-sm-3 d-inline-flex p-2 bd-highlight"><a class="btn btn-lg btn-success" href="{{ path('dish.create') }}"><i class="fa fa-plus-circle"></i><span> Adicionar Prato</span></a></div>
+
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr class="text-center">
                 <td>Numero Pedido</td>
                 <td>Nome do Prato</td>
                 <td>Descrição do Prato</td>
+                <td>Categoria</td>
                 <td>Preço</td>
                 <td>Imagem</td>
                 <td>Acões</td>
@@ -37,6 +45,7 @@
                 <td>{{ dish.id }}</td>
                 <td>{{ dish.dish_name }}</td>
                 <td>{{ dish.dish_description }}</td>
+                <td class="text-success text-xl-center">{{ dish.category }}</td>
                 <td>R$ - {{ dish.price }}</td>
                 {% if dish.image != null %}
                     <td><img src="{{ asset('images/' ~ dish.image) }}" alt="" width="100px" height="100px"></td>

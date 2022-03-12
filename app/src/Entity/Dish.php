@@ -37,6 +37,11 @@ class Dish
      */
     private $image;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="dish")
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -93,5 +98,21 @@ class Dish
     public function getImagePath()
     {
         return '/public/images/'.$this->getImage();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category): void
+    {
+        $this->category = $category;
     }
 }

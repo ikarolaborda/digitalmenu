@@ -18,11 +18,4 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/", name="start")
-     */
-    public function start()
-    {
-
-    }
 }
