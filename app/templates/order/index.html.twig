@@ -9,6 +9,11 @@
                     <h2>Pedidos</h2>
                 </div>
             </div>
+            {% for message in app.flashes('OrderItemDeleted') %}
+                <div class="row-fluid">
+                    <div class="alert alert-danger"><i class="fa fa-remove"></i><span> {{ message }}</span></div>
+                </div>
+            {% endfor %}
                 <div class="row-fluid mt-4">
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -17,6 +22,8 @@
                                 <td>Nome</td>
                                 <td>Preço</td>
                                 <td>Status</td>
+                                <td>Modificar Status</td>
+                                <td>Ações</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,10 +35,27 @@
                                     <td>{{ order.name }}</td>
                                     <td><strong>R$ - {{ order.price }}</strong></td>
                                     <td>{{ order.status }}</td>
+                                    <td class="text-center">
+                                        <div class="dropdown show">
+                                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Status do Pedido
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="{{ path('status', {id: order.id, status: 1}) }}">1 - Pedido em aberto</a>
+                                                <a class="dropdown-item" href="{{ path('status', {id: order.id, status: 2}) }}">2 - Pedido em preparação</a>
+                                                <a class="dropdown-item" href="{{ path('status', {id: order.id, status: 3}) }}">3 - Pedido fechado</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <ul class="list-unstyled">
+                                            <li><a class="btn btn-outline-danger btn-sm" href="{{ path('deleteOrder', {id: order.id}) }}"><i class="fa fa-trash-o"></i><span> - Remover item</span></a></li>
+                                        </ul>
+                                    </td>
                                 </tr>
                         {% endfor %}
                         <tr>
-                            <td colspan="4">Preço Total: <strong>R$ - {{ sum }}</strong></td>
+                            <td colspan="6">Preço Total: <strong>R$ - {{ sum }}</strong></td>
                         </tr>
                         </tbody>
                     </table>

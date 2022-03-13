@@ -44,4 +44,32 @@ class OrderController extends AbstractController
 
         return $this->redirect($this->generateUrl('menu'));
     }
+
+    /**
+     * @Route("/status/{id},{status}", name="status")
+     */
+    public function status($id, $status)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $order = $em->getRepository(Order::class)->find($id);
+
+        $order->setStatus((int)$status);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('order'));
+    }
+
+
+    /**
+     * @Route("/deleteOrder/{id}", name="deleteOrder")
+     */
+    public function deleteOrder($id, OrderRepository $orderRepository)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $order = $orderRepository->find($id);
+        $em->remove($order);
+        $em->flush();
+        $this->addFlash("OrderItemDeleted","O item ". $order->getName()." do pedido solicitado foi removido");
+        return $this->redirect($this->generateUrl('order'));
+    }
 }
