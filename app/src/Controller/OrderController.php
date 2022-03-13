@@ -62,14 +62,20 @@ class OrderController extends AbstractController
 
     /**
      * @Route("/deleteOrder/{id}", name="deleteOrder")
+     * @throws \Exception
      */
     public function deleteOrder($id, OrderRepository $orderRepository)
     {
         $em = $this->getDoctrine()->getManager();
         $order = $orderRepository->find($id);
-        $em->remove($order);
-        $em->flush();
-        $this->addFlash("OrderItemDeleted","O item ". $order->getName()." do pedido solicitado foi removido");
+        if($order->getStatus() != 1) {
+            throw new \Exception('Itens com status diferente de 1 [Em aberto] NÃO podem ser modificados',401);
+        }else
+        {
+            $em->remove($order);
+            $em->flush();
+            $this->addFlash("OrderItemDeleted","O item ". $order->getName()." do pedido solicitado foi removido");
+        }
         return $this->redirect($this->generateUrl('order'));
     }
 }

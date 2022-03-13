@@ -36,6 +36,7 @@
                                     <td><strong>R$ - {{ order.price }}</strong></td>
                                     <td>{{ order.status }}</td>
                                     <td class="text-center">
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                                         <div class="dropdown show">
                                             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 Status do Pedido
@@ -46,12 +47,21 @@
                                                 <a class="dropdown-item" href="{{ path('status', {id: order.id, status: 3}) }}">3 - Pedido fechado</a>
                                             </div>
                                         </div>
+                                        {% else%}
+                                            <p class="text-danger text-uppercase">Somente Funcionários autenticados podem alterar o status de um pedido</p>
+                                        {% endif %}
                                     </td>
-                                    <td class="text-center">
-                                        <ul class="list-unstyled">
-                                            <li><a class="btn btn-outline-danger btn-sm" href="{{ path('deleteOrder', {id: order.id}) }}"><i class="fa fa-trash-o"></i><span> - Remover item</span></a></li>
-                                        </ul>
-                                    </td>
+                                    {% if order.status == 1 %}
+                                        <td class="text-center">
+                                            <ul class="list-unstyled">
+                                                <li><a class="btn btn-outline-danger btn-sm" href="{{ path('deleteOrder', {id: order.id}) }}"><i class="fa fa-trash-o"></i><span> - Remover item</span></a></li>
+                                            </ul>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <p class="lead">Pedidos em processamento ou arquivados <strong>NÃO</strong> podem ser modificados</p>
+                                        </td>
+                                    {% endif%}
                                 </tr>
                         {% endfor %}
                         <tr>
