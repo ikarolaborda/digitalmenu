@@ -54,7 +54,7 @@
         <li><a href="{{ path('home') }}">Início</a></li>
         <li><a href="{{ path('menu') }}">Cardápio</a></li>
         <li><a href="{{ path('order') }}">Pedidos</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="{{ path('mail') }}">Contato</a></li>
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <li><a href="{{ path('dish.dish_main') }}">Pratos</a>
                 <ul class="sub-menu">
