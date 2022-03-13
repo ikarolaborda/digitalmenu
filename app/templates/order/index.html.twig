@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set sum = 0 %}
+    <div class="container mt-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="section-title">
+                    <h2>Pedidos</h2>
+                </div>
+            </div>
+                <div class="row-fluid mt-4">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>Item do Pedido</td>
+                                <td>Nome</td>
+                                <td>Preço</td>
+                                <td>Status</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                            {% set sum = sum + order.price %}
+
+                                <tr>
+                                    <td>{{ order.order_number }}</td>
+                                    <td>{{ order.name }}</td>
+                                    <td><strong>R$ - {{ order.price }}</strong></td>
+                                    <td>{{ order.status }}</td>
+                                </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="4">Preço Total: <strong>R$ - {{ sum }}</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+        </div>
+    </div>
+{% endblock %}

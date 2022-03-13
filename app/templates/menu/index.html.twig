@@ -10,6 +10,9 @@
                     </div>
                 </div>
                 <div class="row-fluid mt-1">
+                    {% for message in app.flashes('order_item_added') %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% endfor %}
                     <div class="container">
                         <ul class="playlist-filter controls">
                             <li class="control" data-filter=".Bebidas">Bebidas</li>
@@ -27,8 +30,9 @@
                     <div class="mix col-lg-3 col-md-4 col-sm-6 {{ dish.category }}">
                         <div class="playlist-item">
                             <img src="{{ asset('images/' ~ dish.image) }}" alt="">
-                            <h5>{{ dish.dish_description }} - R$ {{ dish.price }}</h5>
+                            <h5>{{ dish.dish_description }} - <br><strong>R$ {{ dish.price }}</strong></h5>
                             <p>ID do Prato - {{ dish.id }}</p>
+                            <a class="btn btn-outline-danger btn-sm" href="{{ path('orders', {id: dish.id}) }}" role="button">Adicionar ao Pedido</a>
                         </div>
                     </div>
                     {% endfor %}
